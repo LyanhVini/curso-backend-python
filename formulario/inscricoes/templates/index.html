@@ -1,0 +1,29 @@
+{% if user.is_authenticated %}
+  <div class="perfil">
+    {% if user.is_superuser %}
+      <a href="{% url 'admin:index' %}" class="btn-admin">
+        Painel Administrativo
+      </a>
+    {% endif %}
+    {% if "moderador" in user.groups or user.is_staff %}
+      <a href="{% url 'moderacao' %}" class="btn-moderar">
+        Moderar Conteúdo
+      </a>
+    {% endif %}
+    {% if user.perfil.email_confirmado and not user.perfil.bloqueado %}
+      <a href="{% url 'criar_post' %}" class="btn-postar">
+        Criar Novo Post
+      </a>
+    {% elif not user.perfil.email_confirmado %}
+      <p class="aviso">
+        Confirme seu email para postar.
+      </p>
+    {% endif %}
+  </div>
+{% else %}
+  <div class="convidado">
+    <p>Faça <a href="{% url 'login' %}">login</a> 
+    ou <a href="{% url 'cadastro' %}">cadastre-se</a>.</p>
+  </div>
+{% endif %}
+

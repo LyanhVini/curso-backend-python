@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ p.nome }}</title>
+</head>
+<body>
+    <h1>{{ p.nome }}</h1>
+    
+    <p><strong>Vendido por:</strong> {{ p.produtor }}</p>
+    <h2 style="color: green;">Preço: R$ {{ p.preco }}</h2>
+    
+    <hr>
+    <h3>Sobre este produto:</h3>
+    <p>{{ p.descricao|linebreaksbr }}</p>
+    
+    <button style="background-color: #28a745; color: white;">Comprar Agora</button>
+    <br><br>
+    
+    <a href="{% url 'pagina_inicial' %}">⬅️ Voltar para a Vitrine</a>
+</body>
+</html>

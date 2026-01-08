@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - TechSolutions</title>
+</head>
+<body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5;">
+
+    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px;">
+        <h2 style="text-align: center; color: #333;">TechSolutions</h2>
+        <p style="text-align: center; color: #666;">Acesso Restrito</p>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+                Entrar no Sistema
+            </button>
+        </form>
+        
+        {% if form.errors %}
+            <p style="color: red; text-align: center; font-size: 0.9em; margin-top: 10px;">Usuário ou senha inválidos.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

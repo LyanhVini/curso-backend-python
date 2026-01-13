@@ -76,34 +76,4 @@ Para executar os códigos deste repositório, recomenda-se o uso de um ambiente 
     Instale as outras dependência no ambiente virtual criado
     ```
 
----
-
-## 📅 Cronograma de Módulos
-
-[cite_start]O curso é dividido em 6 módulos integrados[cite: 91, 99]:
-
-1.  **Módulo 1:** Lógica de Programação, Git/GitHub e Engenharia de Software.
-2.  **Módulo 2:** Lógica Avançada e Início de POO.
-3.  **Módulo 3:** Aprofundamento em POO e Banco de Dados.
-4.  **Módulo 4:** Banco de Dados, Design Patterns e Introdução ao Django.
-5.  **Módulo 5:** Django Avançado (Auth, Admin) e Web Services.
-6.  **Módulo 6:** Web Services (APIs) e Prática de Projeto Final.
-
----
-
-## ⚠️ Avisos Importantes
-
-* [cite_start]**Frequência:** Lembre-se que 25% de faltas não justificadas (por disciplina) acarretam em desligamento[cite: 239].
-* [cite_start]**Avaliação:** A média para aprovação é 7.0[cite: 235].
-* **Moodle:** Mantenha suas entregas em dia na plataforma oficial.
-
----
-
-## 👨‍🏫 Equipe
-
-* **Professor:** [Seu Nome]
-* **Professor Assistente (IA):** Gemini (Backend Python & Django)
-* **Monitoria:** [Nome dos Monitores, se houver]
-
----
 *Projeto realizado com apoio do Ministério da Ciência, Tecnologia e Inovação (MCTI) e Softex Pernambuco.*

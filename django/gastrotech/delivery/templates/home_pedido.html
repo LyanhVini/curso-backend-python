@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GastroTech Delivery</title>
+    <style>
+        /* CSS Básico para centralizar e dar aparência limpa */
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px; /* Limita a largura */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], textarea, select {
+            width: 100%; /* Ocupa toda a largura do container */
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff6b6b; /* Cor destaque */
+            color: white;
+        }
+        button:hover { background-color: #e63946; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🛵 GastroTech Rápido</h1>
+    <p style="text-center: center; color: #777;">Fome? Peça agora, sem cadastro!</p>
+    
+    {% if messages %}
+        <ul class="messages" style="padding: 0;">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+             <label>{{ form.prato_escolhido.label }}</label>
+             {{ form.prato_escolhido }}
+             {{ form.prato_escolhido.errors }} </div>
+
+        <div class="form-group">
+            <label>{{ form.cliente_nome.label }}</label>
+            {{ form.cliente_nome }}
+            {{ form.cliente_nome.errors }}
+        </div>
+
+        <div class="form-group">
+             <label>{{ form.cliente_endereco.label }}</label>
+            {{ form.cliente_endereco }}
+            {{ form.cliente_endereco.errors }}
+        </div>
+
+        <button type="submit">
+            🚀 ENVIAR PEDIDO AGORA
+        </button>
+    </form>
+</div>
+
+</body>
+</html>

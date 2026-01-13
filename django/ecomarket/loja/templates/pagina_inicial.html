@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>EcoMarket</title>
+</head>
+<body>
+    <h1>EcoMarket</h1>
+    <p>Apoie produtores locais.</p>
+    <hr>
+    
+    <div style="display: flex; gap: 20px;">
+    {% for p in produtos %}
+        <div style="border: 1px solid #ccc; padding: 10px; width: 200px;">
+            <h3>{{ p.nome }}</h3>
+            <p style="color: green; font-weight: bold;">R$ {{ p.preco }}</p>
+            
+            <a href="{% url 'detalhe' p.id %}">
+                <button>Ver Detalhes</button>
+            </a>
+        </div>
+    {% empty %}
+        <p>Nenhum produto cadastrado.</p>
+    {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Intranet TechSolutions</title>
+</head>
+<body>
+    <header style="background: #333; color: #fff; padding: 10px;">
+        <span>Usuário: {{ user.username }}</span>
+        
+        <form action="{% url 'logout' %}" method="post" style="display:inline; float:right;">
+            {% csrf_token %}
+            <button type="submit">Sair do Sistema</button>
+        </form>
+    </header>
+
+    <main style="padding: 20px;">
+        <h1>Olá, {{ user.first_name }}!</h1>
+        <p>Departamento: <strong>{{ user.funcionario.departamento }}</strong></p>
+        <p>Cargo: <strong>{{ user.funcionario.cargo }}</strong></p>
+
+        <hr>
+
+        {% if user.funcionario.eh_gestor %}
+        
+            <div style="background-color: #e3f2fd; padding: 15px; border: 2px solid #2196f3;">
+                <h2>📊 Painel Gerencial</h2>
+                <p>Acesso permitido a relatórios confidenciais.</p>
+                <button>Ver Performance da Equipe</button>
+                <button>Aprovar Férias</button>
+            </div>
+
+        {% else %}
+
+            <div style="background-color: #f1f8e9; padding: 15px; border: 2px solid #4caf50;">
+                <h2>✅ Área do Colaborador</h2>
+                <p>Bem-vindo ao seu espaço de trabalho.</p>
+                <button>Bater Ponto</button>
+                <button>Meus Holerites</button>
+            </div>
+
+        {% endif %}
+    </main>
+</body>
+</html>

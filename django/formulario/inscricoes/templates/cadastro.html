@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Cadastro</title></head>
+<body>
+    <h2>Nova Inscrição</h2>
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }}  <button type="submit">Salvar</button>
+    </form>
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

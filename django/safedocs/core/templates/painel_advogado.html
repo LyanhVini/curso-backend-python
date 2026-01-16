@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 style="color: darkred;">Painel do Advogado (Restrito)</h2>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Cliente</th>
+            <th>Título</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+        {% for doc in docs %}
+        <tr>
+            <td>{{ doc.dono.username }}</td> <td>{{ doc.titulo }}</td>
+            <td>{{ doc.get_status_display }}</td>
+            <td>
+                <a href="{% url 'mudar_status' doc.id 'APR' %}">✅ Aprovar</a> |
+                <a href="{% url 'mudar_status' doc.id 'REJ' %}">❌ Rejeitar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: sans-serif; padding: 20px;">
+    <nav style="background: #eee; padding: 10px;">
+        Usuário: <b>{{ user.username }}</b> | <a href="/accounts/logout/">Sair</a>
+    </nav>
+    <br>
+    {% block content %}{% endblock %}
+</body>
+</html>

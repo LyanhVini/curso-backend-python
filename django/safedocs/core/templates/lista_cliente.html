@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Meus Documentos</h2>
+    <a href="{% url 'upload' %}"><button>+ Novo Upload</button></a>
+    <ul>
+        {% for doc in docs %}
+            <li>
+                {{ doc.titulo }} - 
+                Status: <b>{{ doc.get_status_display }}</b>
+            </li>
+        {% empty %}
+            <li>Nenhum documento enviado.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 40px;
+            border: 2px dashed #333;
+        }
+
+        h1 {
+            color: #4b0082;
+            font-size: 40px;
+        }
+
+        .tag {
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .vip {
+            background: gold;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TechSummit 2026</h1>
+    <h2>{{ p.nome }}</h2>
+
+    {% if p.vip %}
+    <div class="tag vip">★ VIP ACCESS ★</div>
+    {% else %}
+    <div class="tag">PARTICIPANTE</div>
+    {% endif %}
+
+    <p>ID ÚNICO: {{ p.codigo_ingresso }}</p>
+    <hr>
+    <small>Documento oficial do evento.</small>
+</body>
+
+</html>

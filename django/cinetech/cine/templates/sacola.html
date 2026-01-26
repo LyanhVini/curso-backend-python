@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Seu Carrinho</h2>
-    
-    {% if not itens %}
-        <p>Sua sacola está vazia.</p>
-    {% else %}
-        <ul>
-            {% for item in itens %}
-            <li>{{ item.qtd }} x <b>{{ item.filme.nome }}</b> = R$ {{ item.subtotal }}</li>
-            {% endfor %}
-        </ul>
-        <h3>Total: R$ {{ total }}</h3>
-        
-        <a href="{% url 'limpar' %}">Limpar Sacola</a>
-        
-        <hr>
-        
-        <h3>Finalizar Compra</h3>
-        <p>Ao clicar abaixo, se você não estiver logado, pediremos login.</p>
-        
-        <a href="{% url 'checkout' %}">
-            <button style="padding: 15px; background: #28a745; color: white; border: none; font-size: 16px; cursor: pointer;">
-                ✅ FINALIZAR AGORA
-            </button>
-        </a>
-    {% endif %}
+<h2>Seu Carrinho</h2>
 
-    <h3>Rascunho de Dados (Persistência)</h3>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>Salvar Rascunho (Teste)</button>
-    </form>
+{% if not itens %}
+<p>Sua sacola está vazia.</p>
+{% else %}
+<ul>
+    {% for item in itens %}
+    <li>{{ item.qtd }} x <b>{{ item.filme.nome }}</b> = R$ {{ item.subtotal }}</li>
+    {% endfor %}
+</ul>
+<h3>Total: R$ {{ total }}</h3>
+
+<a href="{% url 'limpar' %}">Limpar Sacola</a>
+
+<hr>
+
+<h3>Finalizar Compra</h3>
+<p>Ao clicar abaixo, se você não estiver logado, pediremos login.</p>
+
+<a href="{% url 'criar_checkout' %}">
+    <button style="padding: 15px; background: #28a745; color: white; border: none; font-size: 16px; cursor: pointer;">
+        ✅ FINALIZAR AGORA
+    </button>
+</a>
+{% endif %}
+
+<h3>Rascunho de Dados (Persistência)</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Salvar Rascunho (Teste)</button>
+</form>
 {% endblock %}

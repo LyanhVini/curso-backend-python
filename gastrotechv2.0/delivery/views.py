@@ -1,41 +1,54 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import PedidoRapidoForm
+from django.db import transaction # controle de transação
 from .models import ItemPedido
-
-# Esta será a nossa página inicial (Home)
+# Create your views here.
+# Programação Defensiva:
 def home_pedido_rapido(request):
-    # --- Fluxo POST (Cliente enviou o pedido) ---
     if request.method == 'POST':
         form = PedidoRapidoForm(request.POST)
         
         if form.is_valid():
-            # 1. Salva os dados do Pedido (Nome, Endereço)
-            # O commit=False cria o objeto na memória, mas não salva no banco ainda.
-            novo_pedido = form.save(commit=False)
-            novo_pedido.status = 'PENDENTE' # Força o status inicial
-            novo_pedido.save() # Agora salva de verdade no banco e gera o ID.
-            
-            # 2. Recupera o prato que o cliente selecionou no dropdown extra
-            prato_selecionado = form.cleaned_data['prato_escolhido']
-            
-            # 3. Cria a ligação (ItemPedido)
-            # "Este novo pedido contém 1 unidade deste prato selecionado"
-            ItemPedido.objects.create(
-                pedido=novo_pedido,
-                prato=prato_selecionado,
-                quantidade=1 # Simplificação: pedido rápido é sempre 1 item
-            )
-            
-            # Feedback e Reset
-            messages.success(request, f"Pedido #{novo_pedido.id} enviado para a cozinha! Aguarde.")
-            return redirect('home')
-            
+            # programação defensiva:
+            # ATOMICIDADE
+            try:
+                with transaction.atomic():
+                    #1. salva o pedido
+                    novo_pedido = form.save(commit=False)
+                    novo_pedido.status = 'PENDENTE'
+                    novo_pedido.save()
+                    
+                    # 2. Cria itempedido
+                    prato_selecionado = form.cleaned_data['prato_escolhido']
+                    ItemPedido.objects.create(
+                        pedido=novo_pedido,
+                        prato=prato_selecionado,
+                        quantidade=1
+                    )
+                    
+                    # Baixa de Estoque
+                    if prato_selecionado.estoque > 0:
+                        prato_selecionado.estoque -= 1
+                        prato_selecionado.save()
+                    else:
+                        raise Exception("Erro de concorrência: estoque insulficiente.")   
+                    
+                messages.success(request, f"Pedido #{novo_pedido.id} enviado para a cozinha!")
+                return redirect('home')
+                
+            except Exception as e:
+                print(f"Erro na transação: {e}")
+                messages.error(request, "Erro interno ao processar pedido.")
         else:
-             messages.error(request, "Ops! Verifique os dados informados.")
-             
-    # --- Fluxo GET (Cliente acessou a página) ---
-    else:
+            messages.error(
+                request,
+                f'Pedido #{novo_pedido.id} não pode ser criado.'
+            )
+    else: # Fluxo GET
         form = PedidoRapidoForm()
-
+        
     return render(request, 'delivery/home_pedido.html', {'form': form})
+        
+
+

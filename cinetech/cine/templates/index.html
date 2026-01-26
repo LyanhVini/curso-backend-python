@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Em cartas ({{qtd}} na sacola)</h2>
+<ul>
+    {% for filme in filmes %}
+        <li>
+            {{ filme.nome }} - R$ {{filme.preco}}
+            <a href="{% url 'add' filme.id %}">[+ Add]</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

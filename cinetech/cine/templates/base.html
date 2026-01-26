@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: sans-serif; padding: 20px;">
+    <nav style="background: #eee; padding: 10px; margin-bottom: 20px;">
+        {% if user.is_authenticated %}
+            Olá, <b>{{ user.username }}</b> 
+            {% if user.is_staff %}(Staff){% endif %}
+            | <a href="/admin/logout/">Sair</a>
+        {% else %}
+            Bem-vindo, <b>Visitante</b> | <a href="/admin/login/">Entrar</a>
+        {% endif %}
+        
+        <span style="float: right">
+            <a href="{% url 'index' %}">Filmes</a> | 
+            <a href="{% url 'ver_sacola' %}">Sacola</a> |
+
+        </span>
+    </nav>
+    
+    {% for msg in messages %}<p style="color: blue">{{ msg }}</p>{% endfor %}
+    
+    {% block content %}{% endblock %}
+</body>
+</html>
